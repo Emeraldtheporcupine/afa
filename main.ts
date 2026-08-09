@@ -3,6 +3,7 @@ namespace SpriteKind {
     export const ConveyorBelt = SpriteKind.create()
     export const SetPeice = SpriteKind.create()
     export const Hole = SpriteKind.create()
+    export const StaticObject = SpriteKind.create()
 }
 function Detection (sprite: Sprite, othersprite: Sprite) {
     tempOverlap = sprite.overlapsWith(othersprite) && (othersprite.z + 5 > sprite.z && othersprite.z - 5 < sprite.z)
@@ -81,6 +82,12 @@ function Start () {
         )
         sprites.setDataString(Conveyor, "Direction", "Down")
     }
+    for (let NoPassZones of tiles.getTilesByType(assets.tile`myTile0`)) {
+        Waller = sprites.create(assets.image`Fence`, SpriteKind.StaticObject)
+        tiles.setTileAt(NoPassZones, assets.tile`myTile`)
+        tiles.placeOnTile(Waller, NoPassZones)
+        Waller.x += 14
+    }
     animation.runImageAnimation(
     mySprite,
     assets.animation`BoxySleep`,
@@ -116,12 +123,20 @@ function Start () {
     music.play(music.createSong(assets.song`Theme`), music.PlaybackMode.LoopingInBackground)
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.ConveyorBelt, function (sprite, otherSprite) {
-    if (sprites.readDataString(otherSprite, "Direction") == "Left") {
-        sprite.x += -0.25
-        sprite.y += 0.125
-    } else if (sprites.readDataString(otherSprite, "Direction") == "Down") {
-        sprite.x += 0.25
-        sprite.y += 0.125
+    canMove = true
+    for (let Wallies of sprites.allOfKind(SpriteKind.StaticObject)) {
+        if (Detection(sprite, Wallies)) {
+            canMove = false
+        }
+    }
+    if (canMove == true) {
+        if (sprites.readDataString(otherSprite, "Direction") == "Left") {
+            sprite.x += -0.25
+            sprite.y += 0.125
+        } else if (sprites.readDataString(otherSprite, "Direction") == "Down") {
+            sprite.x += 0.25
+            sprite.y += 0.125
+        }
     }
 })
 function CreateFlipped (anim: Image[], horizontal: boolean) {
@@ -176,6 +191,8 @@ let SpeedY = 0
 let SpeedX = 0
 let tempImage: Image = null
 let tempFlippedAnim: Image[] = []
+let canMove = false
+let Waller: Sprite = null
 let Conveyor: Sprite = null
 let Drop: Sprite = null
 let Printer: Sprite = null
@@ -252,5 +269,19 @@ game.onUpdate(function () {
             }
         }
         mySprite.z = mySprite.y
+        for (let Walls of sprites.allOfKind(SpriteKind.StaticObject)) {
+            Walls.z = Walls.y
+            if (Detection(mySprite, Walls)) {
+                if ((controller.right.isPressed() || controller.up.isPressed()) && Walls.y < mySprite.y) {
+                    SpeedX = 0
+                    SpeedY = 0
+                } else if ((controller.left.isPressed() || controller.menu.isPressed()) && Walls.y > mySprite.y) {
+                    SpeedX = 0
+                    SpeedY = 0
+                } else {
+                	
+                }
+            }
+        }
     }
 })
