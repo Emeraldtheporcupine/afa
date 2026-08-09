@@ -148,7 +148,16 @@ sprites.onOverlap(SpriteKind.Pushable, SpriteKind.Hole, function (sprite, otherS
         50,
         false
         )
-        pause(assets.animation`FallIntoHole`.length * 50)
+        music.play(music.createSoundEffect(WaveShape.Sawtooth, 619, 619, 255, 255, 50, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
+        pause(50)
+        music.play(music.createSoundEffect(WaveShape.Sawtooth, 619, 619, 188, 188, 50, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
+        pause(50)
+        music.play(music.createSoundEffect(WaveShape.Sawtooth, 619, 619, 111, 111, 50, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
+        pause(50)
+        music.play(music.createSoundEffect(WaveShape.Sawtooth, 619, 619, 58, 58, 50, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
+        pause(50)
+        music.play(music.createSoundEffect(WaveShape.Sawtooth, 619, 619, 16, 16, 50, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
+        pause(50)
         sprites.destroy(sprite)
     }
 })
@@ -185,14 +194,14 @@ color.originalPalette
 PressA = false
 titleScreen = true
 music.play(music.createSong(assets.song`Title`), music.PlaybackMode.InBackground)
-let introScreenSprite = sprites.create(assets.image`myImage`, SpriteKind.SetPeice)
+let introScreenSprite = sprites.create(assets.image`introScreen`, SpriteKind.SetPeice)
 color.startFade(color.Black, color.originalPalette, 500)
-pause(1500)
+pause(2000)
 color.startFade(color.originalPalette, color.Black, 500)
 pause(500)
 sprites.destroy(introScreenSprite)
 scene.setBackgroundImage(assets.image`TitleScreen`)
-pause(1000)
+pause(500)
 color.startFade(color.Black, color.originalPalette, 500)
 pause(500)
 PressA = true
