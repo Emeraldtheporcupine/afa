@@ -1,0 +1,50 @@
+{
+    "name": "AFA",
+    "description": "",
+    "dependencies": {
+        "device": "*",
+        "arcade-sprite-util": "github:jwunderl/arcade-sprite-util#v0.6.0",
+        "arcade-sprite-data": "github:microsoft/arcade-sprite-data#v0.2.1",
+        "arcade-story": "github:microsoft/arcade-storytelling#v1.0.3",
+        "Color Fading": "github:jwunderl/pxt-color#v0.2.3"
+    },
+    "files": [
+        "main.blocks",
+        "main.ts",
+        "README.md",
+        "assets.json",
+        "images.g.jres",
+        "images.g.ts",
+        "tilemap.g.jres",
+        "tilemap.g.ts"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "targetVersions": {
+        "target": "4.0.14",
+        "targetId": "arcade"
+    },
+    "supportedTargets": [
+        "arcade"
+    ],
+    "preferredEditor": "blocksprj",
+    "palette": [
+        "#000000",
+        "#FFFFFF",
+        "#E30D0D",
+        "#990000",
+        "#E26C22",
+        "#F0BF0F",
+        "#1F5FEA",
+        "#47C615",
+        "#0D2ED3",
+        "#858585",
+        "#8E2EC4",
+        "#5C00CC",
+        "#0005A3",
+        "#B5B5B5",
+        "#451212",
+        "#0E1435"
+    ]
+}
